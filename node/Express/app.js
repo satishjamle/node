@@ -1,6 +1,23 @@
-const express = require("express") // import express
+const express = require("express") // import express'
+const path = require('path');
 const app = express()              // create app 
 const port = 80                   // port run on 80
+
+// for serving static files
+
+app.use('/static' , express.static('static'))
+
+// set the template engine as pug
+app.set('view engine' ,'pug')
+
+// set the views directory
+app.set('views',path.join(__dirname, 'views'))
+
+// our pug demo endpoint
+app.get("/demo" ,(req,res)=>{
+    res.status(200).render('demo', { title: 'Hey', message: 'Hello there and thanks for telling me how to use pubg' })
+
+})
 
 
 app.get("/",(req,res)=>{             // handle of get request / end point pr
